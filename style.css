@@ -3,9 +3,9 @@
   justify-content: start;
 }
 
-.IOblock {
+/* .IOblock {
   margin: 10px;
-}
+} */
 
 .lines {
   margin: 10px;
@@ -15,14 +15,19 @@
   font-size: medium;
 }
 
-.transit {
+#transit {
+  font-size: medium;
   vertical-align: top;
   border: solid;
-  width: 180px;
-  height: 100px;
+  width: 200px;
+  height: 90px;
   border-color: black;
 }
 
 .title {
   background-color: lightgray;
+}
+
+.select {
+  width: 150px;
 }

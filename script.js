@@ -88,10 +88,8 @@ let seachButton = document.getElementById("search");
 
 function serchTransit() {
 
-  let transitsText = document.getElementById("transitStation");
-  while (transitsText.firstChild) {
-    transitsText.removeChild(transitsText.firstChild);
-  }
+  let transitsText = document.getElementById("transit");
+  transitsText.innerText = ""
 
   const startLine = document.getElementById("startLineSelect").value;
   const startStation = document.getElementById("startStationSelect").value;
@@ -101,6 +99,7 @@ function serchTransit() {
 
 
   if ((startStation === "") || (goalStation === "")) {
+    transitsText.innerText = "駅が選択されていません";
     console.log("駅が選択されていません");
     return "end";
   }
@@ -134,9 +133,10 @@ function serchTransit() {
   console.log(transits);
 
   for (const station of transits) {
-    let transitObj = document.createElement("li")
-    transitObj.innerText = station;
-    transitsText.appendChild(transitObj);
+    transitsText.innerText += station + "\n";
+    // let transitObj = document.createElement("li")
+    // transitObj.innerText = station;
+    // transitsText.appendChild(transitObj);
   }
   return "end";
 
@@ -165,7 +165,8 @@ function seachTree(currentStation, goalLine, goalStation) {
       console.log(currentLines, goalLines);
       let commonLines = transitCompair(currentLines, goalLines);
       if (commonLines.length !== 0) {
-        transits.push(station);
+        transits.push(`・${station} => ${lines[goalLine]}`);
+        transits[transits.length - 2] += " => " + lines[line];
         console.log(transits);
         return;
       }
@@ -174,15 +175,20 @@ function seachTree(currentStation, goalLine, goalStation) {
   }
   
   let lineDistance = 6;
+  let line;
   for (const rerayStation of rerayStations) {
-    for (const line of transitToLine[rerayStation]) {
+    for (line of transitToLine[rerayStation]) {
       if (lineDistance >= Math.abs(goalLine - line)) {
         lineDistance = Math.abs(goalLine - line);
         station = rerayStation;
       }
     }
   }
-  transits.push(station);
+  transits.push("・" + station);
+  if (transits.length >= 2) {
+    transits[transits.length - 2] += " => " + lines[line];
+    console.log(transits[transits.length-2]);
+  }
   console.log(transits);
   seachTree(station, goalLine, goalStation);
 }
