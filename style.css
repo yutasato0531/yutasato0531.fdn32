@@ -1,6 +1,7 @@
 .body {
   display: flex;
   justify-content: start;
+  background-color: lime;
 }
 
 /* .IOblock {
@@ -26,7 +27,8 @@
 }
 
 .title {
-  background-color: lightgray;
+  background-color: green;
+  color: white;
 }
 
 .select {
