@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+</head>
+
+<body class="body">
+  <div class="IOblock">
+  <div class="input-block">
+    <h2 class="title">出発駅</h2>
+    <div class="select-block">
+      <label>路線：
+        <select id="startLineSelect">
+          <option value="">選択してください</option>
+        </select>
+      </label>
+    </div>
+    <div class="select-block">
+      <label>駅：　
+        <select id="startStationSelect" disabled>
+          <option value="">選択してください</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <div class="input-block">
+    <h2 class="title">到着駅</h2>
+    <div class="select-block">
+      <label>路線：
+        <select id="goalLineSelect">
+          <option value="">選択してください</option>
+        </select>
+      </label>
+    </div>
+    <div class="select-block">
+      <label>駅：　
+        <select id="goalStationSelect" disabled>
+          <option value="">選択してください</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <br>
+  <button id="search">乗り換え駅を検索</button>
+  <br>
+  <div class="input-block">
+    <h2 class="title">乗り換え駅</h2>
+    <div class="transit">
+      <ul id="transitStation">
+      </ul>
+    </div>
+  </div>
+  </div>
+  <div class="lines">
+    <img height=450 src="lines.gif">
+    <br>
+    <small>出展:https://www.rosenzu.com/rr/rrj11.html</small>
+  </div>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
