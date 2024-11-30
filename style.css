@@ -5,7 +5,6 @@
 #display {
   display: flex;
   justify-content: start;
-  background-color: lime;
 }
 
 #title {
