@@ -1,7 +1,16 @@
 .body {
+  background-color: lime;
+}
+
+#display {
   display: flex;
   justify-content: start;
   background-color: lime;
+}
+
+#title {
+  text-align: center;
+  width: 900px;
 }
 
 /* .IOblock {
