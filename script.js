@@ -118,9 +118,7 @@ function serchTransit() {
   let commonLines = transitCompair(currentLines, goalLines);
   if (commonLines.length !== 0) {
     console.log("直通の判定");
-    let transitObj = document.createElement("li")
-    transitObj.innerText = "直通です";
-    transitsText.appendChild(transitObj);
+    transitsText.innerText = "直通です";
     return "end";
   }
 
@@ -134,9 +132,6 @@ function serchTransit() {
 
   for (const station of transits) {
     transitsText.innerText += station + "\n";
-    // let transitObj = document.createElement("li")
-    // transitObj.innerText = station;
-    // transitsText.appendChild(transitObj);
   }
   return "end";
 
@@ -156,7 +151,7 @@ function seachTree(currentStation, goalLine, goalStation) {
   }
   console.log(currentLines);
 
-  let station;
+  let station = [];
   rerayStations = [];
   for (const line of currentLines) {
     for (station of transitStations[line]) {
@@ -165,30 +160,42 @@ function seachTree(currentStation, goalLine, goalStation) {
       console.log(currentLines, goalLines);
       let commonLines = transitCompair(currentLines, goalLines);
       if (commonLines.length !== 0) {
-        transits.push(`・${station} => ${lines[goalLine]}`);
-        transits[transits.length - 2] += " => " + lines[line];
+        transits.push(`・${station}`);
+        // transits.push(`・${station} => ${lines[goalLine]}`);
+        // transits[transits.length - 2] += " => " + lines[line];
         console.log(transits);
         return;
       }
-      rerayStations.push(station);
+      if (!rerayStations.includes(station)) {
+        rerayStations.push(station);
+        console.log(rerayStations);
+      }
     }
   }
   
   let lineDistance = 6;
   let line;
+  console.log("乗換駅候補一覧", rerayStations);
   for (const rerayStation of rerayStations) {
     for (line of transitToLine[rerayStation]) {
-      if (lineDistance >= Math.abs(goalLine - line)) {
+      console.log("乗換駅候補", rerayStation);
+      console.log("乗り換え路線の候補", transitToLine[rerayStation]);
+      console.log("goalLine", goalLine);
+      console.log("line", line);
+      console.log("到着路線との距離", Math.abs(goalLine - line));
+      if (lineDistance > Math.abs(goalLine - line)) {
+        console.log("更新された路線", line)
         lineDistance = Math.abs(goalLine - line);
+        console.log("更新された乗換駅候補", rerayStation);
         station = rerayStation;
       }
     }
   }
-  transits.push("・" + station);
-  if (transits.length >= 2) {
-    transits[transits.length - 2] += " => " + lines[line];
-    console.log(transits[transits.length-2]);
-  }
+  transits.push(`・${station}`);
+  // if (transits.length >= 2) {
+  //   transits[transits.length - 2] += " => " + lines[line];
+  //   console.log(transits[transits.length-2]);
+  // }
   console.log(transits);
   seachTree(station, goalLine, goalStation);
 }
