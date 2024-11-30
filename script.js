@@ -15,6 +15,16 @@ const stations = [
   ["豊橋", "船町", "下地", "小坂井", "牛久保", "豊川"]
 ];
 
+const distansLineToLine = [
+  [0, 1, 2, 1, 2, 2, 2],
+  [1, 0, 1, 2, 2, 3, 3],
+  [2, 1, 0, 1, 1, 2, 2],
+  [1, 2, 1, 0, 1, 1, 1],
+  [2, 3, 1, 1, 0, 2, 2],
+  [2, 3, 2, 1, 2, 0, 2],
+  [2, 3, 2, 1, 2, 2, 0]
+]
+
 const lines = ["高山本線", "太田線", "中央本線", "東海道本線", "関西本線", "武豊線", "飯田線"]
 
 const transitStations = [
@@ -110,10 +120,10 @@ function serchTransit() {
   console.log(goalStation);
 
   let currentLines = statioToLines(startStation);
-  console.log("startLines", currentLines);
+  console.log("出発駅が所属する路線番号", currentLines);
 
   let goalLines = statioToLines(goalStation);
-  console.log("goalLines", goalLines);
+  console.log("到着駅が所属する路線番号", goalLines);
 
   let commonLines = transitCompair(currentLines, goalLines);
   if (commonLines.length !== 0) {
@@ -124,11 +134,11 @@ function serchTransit() {
 
   transits = [];
 
-  console.log(transits);
+  console.log("乗り換え駅一覧の初期状態", transits);
 
   seachTree(startStation, goalLine, goalStation);
 
-  console.log(transits);
+  console.log("乗り換え駅一覧", transits);
 
   for (const station of transits) {
     transitsText.innerText += station + "\n";
@@ -140,7 +150,7 @@ function serchTransit() {
 
 function seachTree(currentStation, goalLine, goalStation) {
   let goalLines = statioToLines(goalStation);
-  console.log("goalLines", goalLines);
+  console.log("到着駅が所属する路線番号", goalLines);
 
   let currentLines = [];
   let rerayStations;
@@ -149,32 +159,30 @@ function seachTree(currentStation, goalLine, goalStation) {
       currentLines.push(i);
     }
   }
-  console.log(currentLines);
+  console.log("探索中の路線番号",currentLines);
 
   let station = [];
   rerayStations = [];
   for (const line of currentLines) {
     for (station of transitStations[line]) {
-      console.log(transitStations[line]);
+      console.log("探索対象の乗換駅", transitStations[line]);
       let currentLines = statioToLines(station);
-      console.log(currentLines, goalLines);
+      console.log("探索中の路線番号と到着駅が所属する路線番号", currentLines, goalLines);
       let commonLines = transitCompair(currentLines, goalLines);
       if (commonLines.length !== 0) {
-        transits.push(`・${station}`);
-        // transits.push(`・${station} => ${lines[goalLine]}`);
-        // transits[transits.length - 2] += " => " + lines[line];
-        console.log(transits);
+        transits.push(`・${station} => ${lines[goalLine]}`);
         return;
       }
       if (!rerayStations.includes(station)) {
         rerayStations.push(station);
-        console.log(rerayStations);
+        console.log("現在一から乗り換え可能なす全ての駅", rerayStations);
       }
     }
   }
   
-  let lineDistance = 6;
+  let lineDistance = 3;
   let line;
+  let selectedLine;
   console.log("乗換駅候補一覧", rerayStations);
   for (const rerayStation of rerayStations) {
     for (line of transitToLine[rerayStation]) {
@@ -182,21 +190,18 @@ function seachTree(currentStation, goalLine, goalStation) {
       console.log("乗り換え路線の候補", transitToLine[rerayStation]);
       console.log("goalLine", goalLine);
       console.log("line", line);
-      console.log("到着路線との距離", Math.abs(goalLine - line));
-      if (lineDistance > Math.abs(goalLine - line)) {
+      console.log("到着路線との距離", distansLineToLine[line][goalLine]);
+      if (lineDistance >= distansLineToLine[line][goalLine]) {
         console.log("更新された路線", line)
-        lineDistance = Math.abs(goalLine - line);
+        lineDistance = distansLineToLine[line][goalLine];
         console.log("更新された乗換駅候補", rerayStation);
+        selectedLine = line;
         station = rerayStation;
       }
     }
   }
-  transits.push(`・${station}`);
-  // if (transits.length >= 2) {
-  //   transits[transits.length - 2] += " => " + lines[line];
-  //   console.log(transits[transits.length-2]);
-  // }
-  console.log(transits);
+  transits.push(`・${station} => ${lines[selectedLine]}`);
+  console.log("乗り換え駅一覧", transits);
   seachTree(station, goalLine, goalStation);
 }
 
@@ -213,10 +218,10 @@ function statioToLines(station) {
 
 
 function transitCompair(currentlines, goalLines) {
-  console.log(currentlines);
-  console.log(goalLines);
+  console.log("探索中の駅が所属する路線番号", currentlines);
+  console.log("到着駅が所属する路線番号", goalLines);
   let commonLines = currentlines.filter(item => goalLines.includes(item));
-  console.log(commonLines);
+  console.log("探索中の駅と到着駅で共通する路線番号", commonLines);
   return commonLines;
 }
 
