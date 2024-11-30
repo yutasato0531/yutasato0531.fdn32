@@ -128,7 +128,7 @@ function serchTransit() {
   let commonLines = transitCompair(currentLines, goalLines);
   if (commonLines.length !== 0) {
     console.log("直通の判定");
-    transitsText.innerText = "直通です";
+    transitsText.innerText = "　直通です";
     return "end";
   }
 
