@@ -4,7 +4,6 @@
 }
 
 #display {
-  display: flex;
   margin-left: 50px;
   width: 1100px;
   justify-content: center;
