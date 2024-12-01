@@ -1,20 +1,33 @@
 .body {
-  background-color: lime;
+  width: 1100px;
+  margin: auto;
 }
 
 #display {
   display: flex;
-  justify-content: start;
+  justify-content: center;
+  background-color: #55d655;
+  border-radius: 15px;
+  box-shadow: 0px 0px 5px 5px lightgray;
 }
 
 #title {
-  text-align: center;
-  width: 950px;
+  background: linear-gradient(white,#55d655);
+  width: fit-content;
+  margin: auto;
+}
+
+#IOblock {
+  margin-top: 15px;
+  margin-left: 70px;
+  margin-bottom: 15px;
 }
 
 .lines {
   margin-left: 50px;
-  margin-top: 15px;
+  margin-top: 30px;
+  margin-right: 70px;
+  margin-bottom: 15px;
 }
 
 #transitStation {
@@ -25,14 +38,16 @@
   font-size: medium;
   vertical-align: top;
   border: solid;
-  width: 200px;
-  height: 90px;
+  width: 250px;
+  height: 140px;
   border-color: black;
+  border-radius: 5px;
 }
 
 .title {
   background-color: green;
   color: white;
+  border-radius: 5px;
 }
 
 .select {
