@@ -27,7 +27,7 @@ const stations = [
     "三木里", "九鬼", "大曽根浦", "尾鷲", "相賀", "船津", "三野瀬", "紀伊長島", "梅ケ谷", "大内山", "伊勢柏崎", "阿曽", "滝原",
     "三瀬谷", "川添", "栃原", "佐奈", "相可", "多気", "徳和", "松坂", "六軒", "高茶屋", "阿漕", "津", "一身田", "下庄", "亀山"],
   ["伊勢奥津", "比津", "伊勢八知", "伊勢鎌倉", "伊勢竹原", "家城", "関ノ宮", "伊勢川口", "伊勢大井", "井関", "一志", "伊勢八太", "権現前", "上ノ庄", "松坂"],
-  ["多気", "外城田", "田丸", "宮川", "山田上口", "伊勢市h", "五十鈴ヶ丘", "二見浦", "松下", "鳥羽"]  
+  ["多気", "外城田", "田丸", "宮川", "山田上口", "伊勢市h", "五十鈴ヶ丘", "二見浦", "松下", "鳥羽"]
 ];
 
 const distansLineToLine = [
@@ -180,7 +180,7 @@ function seachTree(currentStation, goalLine, goalStation) {
       currentLines.push(i);
     }
   }
-  console.log("探索中の路線番号",currentLines);
+  console.log("探索中の路線番号", currentLines);
 
   let station = [];
   rerayStations = [];
@@ -200,7 +200,7 @@ function seachTree(currentStation, goalLine, goalStation) {
       }
     }
   }
-  
+
   let lineDistance = 4;
   let line;
   let selectedLine;
