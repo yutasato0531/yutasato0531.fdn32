@@ -27,7 +27,7 @@ const stations = [
     "三木里", "九鬼", "大曽根浦", "尾鷲", "相賀", "船津", "三野瀬", "紀伊長島", "梅ケ谷", "大内山", "伊勢柏崎", "阿曽", "滝原",
     "三瀬谷", "川添", "栃原", "佐奈", "相可", "多気", "徳和", "松坂", "六軒", "高茶屋", "阿漕", "津", "一身田", "下庄", "亀山"],
   ["伊勢奥津", "比津", "伊勢八知", "伊勢鎌倉", "伊勢竹原", "家城", "関ノ宮", "伊勢川口", "伊勢大井", "井関", "一志", "伊勢八太", "権現前", "上ノ庄", "松坂"],
-  ["多気", "外城田", "田丸", "宮川", "山田上口", "伊勢市h", "五十鈴ヶ丘", "二見浦", "松下", "鳥羽"]
+  ["多気", "外城田", "田丸", "宮川", "山田上口", "伊勢市", "五十鈴ヶ丘", "二見浦", "松下", "鳥羽"]
 ];
 
 const distansLineToLine = [
@@ -201,7 +201,7 @@ function seachTree(currentStation, goalLine, goalStation) {
     }
   }
 
-  let lineDistance = 4;
+  let lineDistance = 5;
   let line;
   let selectedLine;
   console.log("乗換駅候補一覧", rerayStations);
@@ -247,6 +247,35 @@ function transitCompair(currentlines, goalLines) {
 }
 
 
+let image = document.getElementById("linesImg");
+let zoomBox = document.getElementById("zoomBox");
+let zoomImage = document.getElementById("zoomImage");
+let rate = 3;
+
+zoomImage.height = (480 * rate);
+
+function zoom (event) {
+  zoomBox.style.opacity = 1;
+  zoomBox.style.top = (event.offsetY- 100) + "px";
+  zoomBox.style.left = (event.offsetX - 100) + "px";
+  console.log(zoomBox.style.top, zoomBox.style.left);
+
+  let newOffsetY = event.offsetY * rate * -1 + 100;
+  let newOffsetX = event.offsetX * rate * -1 + 100;
+
+  zoomImage.style.marginTop = (newOffsetY) + "px";
+  zoomImage.style.marginLeft = (newOffsetX) + "px";
+  console.log(zoomImage.style.marginTop, zoomImage.style.marginLeft);
+}
+
+
+function out () {
+  zoomBox.style.opacity = 0;
+}
+
+
 inputStartLine.addEventListener('change', { name: "startStationSelect", handleEvent: selectedLine });
 inputGoalLine.addEventListener('change', { name: "goalStationSelect", handleEvent: selectedLine });
 seachButton.addEventListener('click', serchTransit);
+image.addEventListener("mousemove", zoom);
+image.addEventListener("mouseout", out);

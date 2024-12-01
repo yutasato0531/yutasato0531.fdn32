@@ -1,6 +1,6 @@
 .body {
   width: 1100px;
-  margin: auto;
+  margin-left: 50px;
 }
 
 #display {
@@ -30,10 +30,6 @@
   margin-bottom: -15px;
 }
 
-#transitStation {
-  font-size: medium;
-}
-
 #transit {
   font-size: medium;
   vertical-align: top;
@@ -53,4 +49,28 @@
 
 .select {
   width: 150px;
+}
+
+#lines {
+  margin-left: 50px;
+  margin-top: 30px;
+  margin-right: 70px;
+  margin-bottom: -15px;
+  cursor: pointer;
+  position: relative;
+}
+
+#iniImageBox {
+  z-index: 0;
+}
+
+#zoomBox {
+  position: absolute;
+  opacity:0;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 100%;
+  pointer-events: none;
+  z-index: 1;
 }
