@@ -274,8 +274,20 @@ function out () {
 }
 
 
+let onOff = document.getElementById("switch");
+onOff.checked = false;
+
+function disableZoom() {
+  if (!onOff.checked) {
+    image.removeEventListener("mousemove", zoom);
+  } else {
+    image.addEventListener("mousemove", zoom);
+  }
+}
+
+
 inputStartLine.addEventListener('change', { name: "startStationSelect", handleEvent: selectedLine });
 inputGoalLine.addEventListener('change', { name: "goalStationSelect", handleEvent: selectedLine });
 seachButton.addEventListener('click', serchTransit);
-image.addEventListener("mousemove", zoom);
+onOff.addEventListener('change', disableZoom);
 image.addEventListener("mouseout", out);
