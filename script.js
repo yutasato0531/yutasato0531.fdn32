@@ -132,7 +132,7 @@ function serchTransit() {
   if ((startStation === "") || (goalStation === "")) {
     transitsText.innerText = "　駅が選択されていません";
     console.log("駅が選択されていません");
-    return "end";
+    return;
   }
 
   console.log(startLine);
@@ -150,7 +150,7 @@ function serchTransit() {
   if (commonLines.length !== 0) {
     console.log("直通の判定");
     transitsText.innerText = "　直通です";
-    return "end";
+    return;
   }
 
   transits = [];
@@ -164,7 +164,7 @@ function serchTransit() {
   for (const station of transits) {
     transitsText.innerText += station + "\n";
   }
-  return "end";
+  return;
 
 }
 
@@ -196,7 +196,7 @@ function seachTree(currentStation, goalLine, goalStation) {
       }
       if (!rerayStations.includes(station)) {
         rerayStations.push(station);
-        console.log("現在一から乗り換え可能なす全ての駅", rerayStations);
+        console.log("現在位置から乗り換え可能なす全ての駅", rerayStations);
       }
     }
   }
